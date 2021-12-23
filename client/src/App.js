@@ -1,7 +1,9 @@
 import MainLayout from "./layout/MainLayout";
-import {Box, FormControl, Grid, InputAdornment, OutlinedInput, Paper, styled} from "@mui/material";
+import {Box, Grid, Paper, styled} from "@mui/material";
 import {Search} from "react-feather";
 import Chart from "./components/Chart";
+import {SearchBox} from "./components/Search";
+import {DataProvider} from "./contexts/DataContext";
 
 const InfoPane = styled(Paper)(({theme}) => ({
     backgroundColor: 'rgba(7,19,29,0.51)',
@@ -28,57 +30,43 @@ const ChartContainer = styled(Box)(({theme}) => ({
     width: '100%',
 }));
 
-const SearchField = styled(OutlinedInput)(({theme}) => ({
-    borderRadius: '5px',
-    height: '80px',
-    backgroundColor: theme.palette.background.primary,
-    color: theme.palette.text.secondary,
-    padding: '15px'
-}));
-
 
 function App() {
     return (
         <MainLayout>
-            <Grid container spacing={2}>
-                <Grid item md={8}>
-                    <ChartContainer>
-                        <Chart/>
-                    </ChartContainer>
-                </Grid>
-                <Grid item md={true}>
-                    <SearchSection>
-                        <SearchContent>
-                            <Box mt={20}>
-                                <FormControl variant={"outlined"} fullWidth>
-                                    <SearchField
-                                        endAdornment={
-                                            <InputAdornment position="start">
-                                                <Search size={35}/>
-                                            </InputAdornment>
-                                        }
-                                        placeholder="Search a Github Repository..."
+            <DataProvider>
+                <Grid container spacing={2}>
+                    <Grid item md={8}>
+                        <ChartContainer>
+                            <Chart/>
+                        </ChartContainer>
+                    </Grid>
+                    <Grid item md={true}>
+                        <SearchSection>
+                            <SearchContent>
+                                <Box sx={{
+                                    position: "relative",
+                                    height: '15px'
+                                }} mt={20}>
+                                    <SearchBox/>
+                                </Box>
+                                <Box mt={20}>
+                                    <InfoPane>
+                                        <div>
+                                            <Search size={80}/>
+                                        </div>
+                                        <div>
+                                            <p>Search for a Github repository to populate graph</p>
+                                        </div>
+                                    </InfoPane>
+                                </Box>
+                            </SearchContent>
+                        </SearchSection>
 
-                                    />
-                                </FormControl>
-
-                            </Box>
-                            <Box mt={5}>
-                                <InfoPane>
-                                    <div>
-                                        <Search size={80}/>
-                                    </div>
-                                    <div>
-                                        <p>Search for a Github repository to populate graph</p>
-                                    </div>
-                                </InfoPane>
-                            </Box>
-                        </SearchContent>
-
-                    </SearchSection>
+                    </Grid>
 
                 </Grid>
-            </Grid>
+            </DataProvider>
         </MainLayout>
     );
 }
