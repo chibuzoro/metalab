@@ -6,8 +6,8 @@ ENV PATH /metalab/node_modules/.bin:$PATH
 
 COPY . /metalab
 
-
 RUN yarn install -p
 
+COPY . .
 
 CMD ["yarn", "start"]

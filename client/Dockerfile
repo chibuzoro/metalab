@@ -4,9 +4,13 @@ WORKDIR /metalab
 
 ENV PATH /metalab/node_modules/.bin:$PATH
 
-COPY . /metalab
+COPY package.json /metalab
+COPY yarn.lock /metalab
 
 
 RUN yarn install -p
 
-CMD ["yarn", "start"]
+COPY src /metalab/src
+COPY public /metalab/public
+
+CMD ["yarn", "build"]

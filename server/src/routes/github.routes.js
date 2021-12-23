@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {getGitRepo} from "../controllers/GithubController";
+import {getGitRepo, getCommitActivity} from "../controllers/GithubController";
 
 const router = Router();
 
@@ -9,6 +9,8 @@ router.get('/', (req, res)=>{
 } )
 
 router.get('/api/v1/search', getGitRepo)
+
+router.get('/api/v1/commit-activity', getCommitActivity)
 
 
 export default router
