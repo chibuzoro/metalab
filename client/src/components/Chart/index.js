@@ -1,13 +1,25 @@
-import {memo, useContext, useEffect, useState} from 'react';
+import {memo, useCallback, useContext, useEffect, useState} from 'react';
 import {Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 import DataContext from "../../contexts/DataContext";
 import CustomToolTip from "./CustomTooltip";
+import HoverEventContext from "../../contexts/HoverEventContext";
 
 const Chart = ({theme}) => {
 
     const {chartData} = useContext(DataContext);
     const [data, setData] = useState([]);
     const [lineData, setLineData] = useState([]);
+    const {eventIdentifier} = useContext(HoverEventContext);
+    const updateStyle = useCallback((id) => {
+        if (!eventIdentifier.id) {
+            return {
+                opacity: 1,
+            }
+        }
+        return {
+            opacity: eventIdentifier.id.toString() !== id ? 0.2 : 1
+        }
+    }, [eventIdentifier])
 
     useEffect(() => {
 
@@ -53,7 +65,6 @@ const Chart = ({theme}) => {
 
     }, [chartData]);
 
-
     return (
         <ResponsiveContainer width="100%" height={"100%"}>
             <LineChart
@@ -74,6 +85,7 @@ const Chart = ({theme}) => {
 
                     lineData.map((obj) => (
                         <Line
+                            style={updateStyle(obj.key_name)}
                             type="natural"
                             key={obj.key_name}
                             dataKey={obj.key_name}

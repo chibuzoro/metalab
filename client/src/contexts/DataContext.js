@@ -4,8 +4,11 @@ import {merge} from "lodash";
 
 
 const DataContext = createContext({
-    data: [],
+    chartData: {},
+    activeSelection: [],
     fetchCommitData: () => {
+    },
+    removeCommitData: () => {
     }
 });
 
@@ -60,7 +63,7 @@ export const DataProvider = ({children}) => {
             const hash = hashStr(full_name);
 
             // avoid unneeded lookups
-            if (chartData[hash]) {
+            if (chartData[hash] || activeSelection.length  >= 3) {
                 return;
             }
 
