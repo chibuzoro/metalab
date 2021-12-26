@@ -3,9 +3,10 @@ import {Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recha
 import DataContext from "../../contexts/DataContext";
 import CustomToolTip from "./CustomTooltip";
 import HoverEventContext from "../../contexts/HoverEventContext";
+import {useTheme} from "@mui/material";
 
-const Chart = ({theme}) => {
-
+const Chart = () => {
+    const {transitions} = useTheme();
     const {chartData} = useContext(DataContext);
     const [data, setData] = useState([]);
     const [lineData, setLineData] = useState([]);
@@ -13,13 +14,13 @@ const Chart = ({theme}) => {
     const updateStyle = useCallback((id) => {
         if (!eventIdentifier.id) {
             return {
-                opacity: 1,
+                opacity: transitions.opacity.full,
             }
         }
         return {
-            opacity: eventIdentifier.id.toString() !== id ? 0.2 : 1
+            opacity: eventIdentifier.id.toString() !== id ? transitions.opacity.blur : transitions.opacity.full
         }
-    }, [eventIdentifier])
+    }, [eventIdentifier, transitions])
 
     useEffect(() => {
 

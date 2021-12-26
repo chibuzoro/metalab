@@ -17,6 +17,12 @@ const theme = createTheme({
         fontSize: 20,
     },
     spacing: 4,
+    transitions:{
+        opacity: {
+            blur: 0.3,
+            full: 1
+        }
+    }
 
 });
 

@@ -1,4 +1,4 @@
-import {Box, Paper, styled} from "@mui/material";
+import {Box, Paper, styled, useTheme} from "@mui/material";
 import {Star, Trash2} from "react-feather";
 import {humanReadableDates} from "../../util/dateUtil";
 import {useContext, useRef} from "react";
@@ -65,19 +65,20 @@ const ThrashButton = styled(Box)(({theme, showTrash}) => ({
 
 export const StatusPane = ({data, removeHandler}) => {
     const ref = useRef(null);
+    const {transitions} = useTheme();
     const {eventIdentifier} = useContext(HoverEventContext);
 
 
     const showTrash = () => {
         if (ref.current) {
 
-            ref.current.style.opacity = 1;
+            ref.current.style.opacity = transitions.opacity.full;
             if (!eventIdentifier.id) {
                 return false
             }
 
             if (data.id !== eventIdentifier.id) {
-                ref.current.style.opacity = 0.5;
+                ref.current.style.opacity = transitions.opacity.blur;
                 return false
             }
         }
