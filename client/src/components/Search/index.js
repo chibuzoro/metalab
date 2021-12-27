@@ -1,6 +1,5 @@
 import SearchInput from "./SearchInput";
 import {debounce} from "lodash";
-import {getGitRepo} from "../../apis/github";
 import React, {useContext, useState} from "react";
 import {Box, styled} from "@mui/material";
 import DataContext from "../../contexts/DataContext";
@@ -21,7 +20,7 @@ const FinderWrapper = styled(Box)(({theme}) => ({
 export const SearchBox = () => {
 
     const [data, setData] = useState([]);
-    const {fetchCommitData} = useContext(DataContext);
+    const {fetchCommitData, fetchRepository} = useContext(DataContext);
 
     /**
      * Perform Repo Search
@@ -29,12 +28,12 @@ export const SearchBox = () => {
      */
     const handleSearch = debounce(async (event) => {
         const input = event.target.value;
-        if (! input){
+        if (!input) {
             setData([]);
             return;
         }
 
-        const res = await getGitRepo(input);
+        const res = await fetchRepository(input);
         if (res.data) {
             setData(res.data.items);
         }

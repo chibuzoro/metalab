@@ -1,15 +1,14 @@
 import React, {createContext, useState} from "react";
-import {getCommitActivity} from "../apis/github";
+import {getCommitActivity, getGitRepo} from "../apis/github";
 import {merge} from "lodash";
 
 
 const DataContext = createContext({
     chartData: {},
     activeSelection: [],
-    fetchCommitData: () => {
-    },
-    removeCommitData: () => {
-    }
+    fetchCommitData: () => {},
+    removeCommitData: () => {},
+    fetchRepository: () => {}
 });
 
 export const DataProvider = ({children}) => {
@@ -54,7 +53,14 @@ export const DataProvider = ({children}) => {
         }
     }
 
-    const fetchCommitData = async ({full_name, stargazers_count, updated_at, id}) => {
+    /**
+     * Get the commit stats for the provided payload
+     * @param full_name
+     * @param stargazers_count
+     * @param pushed_at
+     * @returns {Promise<void>}
+     */
+    const fetchCommitData = async ({full_name, stargazers_count, pushed_at}) => {
         try {
             const [user, repo] = full_name.split('/');
             const color_tag = generateColorTag();
@@ -71,7 +77,7 @@ export const DataProvider = ({children}) => {
                 user,
                 repo,
                 stargazers_count,
-                updated_at,
+                updated_at: pushed_at,
                 id: hash,
                 color_tag
             }, ...activeSelection]);
@@ -85,6 +91,22 @@ export const DataProvider = ({children}) => {
             console.error(e);
             setChartData({});
             setActiveSelectionData([]);
+        }
+
+    }
+
+
+    /**
+     * Fetch a list of repositories matching the repo name given
+     * @param name
+     * @returns {Promise<*>}
+     */
+    const fetchRepository = async (name) =>{
+        try{
+            return await getGitRepo(name);
+        }catch (e){
+            // handle weird errors
+            console.error(e);
         }
 
     }
@@ -106,7 +128,8 @@ export const DataProvider = ({children}) => {
             chartData,
             activeSelection,
             fetchCommitData,
-            removeCommitData
+            removeCommitData,
+            fetchRepository
         }}>
             {children}
         </DataContext.Provider>

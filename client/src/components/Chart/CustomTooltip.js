@@ -3,8 +3,7 @@ import {Box, Paper, styled} from "@mui/material";
 import {GitCommit} from "react-feather";
 
 
-
-const Wrapper = styled(Paper)(({theme})=>
+const Wrapper = styled(Paper)(({theme}) =>
     ({
         padding: '10px 10px 0',
         textAlign: 'center',
@@ -12,33 +11,40 @@ const Wrapper = styled(Paper)(({theme})=>
     })
 );
 
-const CommitBox =  styled(Box)(({theme})=>
+const CommitBox = styled(Box)(({theme}) =>
     ({
-        width: '100%',
+        minWidth: '100px',
         display: 'inline-flex',
-        justifyContent: 'space-evenly',
+        alignContent: 'center',
         fontWeight: 'bold',
-        'span' : {
-            lineHeight: 2
+        marginLeft: 15,
+        'span': {
+            lineHeight: 2,
+            marginLeft: 15,
         }
     })
 );
 
-const CustomToolTip = ({ active, payload, label}) => {
+const CustomToolTip = ({active, payload, label}) => {
 
-    if (active && payload && payload.length && label){
+    if (active && payload && payload.length && label) {
         const dateAsString = DateTime.fromSeconds(label).toFormat('LLL dd, yyyy')
+
+        const Commits = payload.map((load) => (<CommitBox key={load.dataKey}>
+            <GitCommit size={40} color={load.color}/>
+            <Box>
+                <span>  {load.value} Commits</span>
+            </Box>
+        </CommitBox>));
+
         return (
             <Wrapper>
                 <Box>
                     <span>Week of {dateAsString}</span>
                 </Box>
-                <CommitBox>
-                    <GitCommit size={40}/>
-                    <Box>
-                        <span>  {payload[0].value} Commits</span>
-                    </Box>
-                </CommitBox>
+                <Box>
+                    {Commits}
+                </Box>
 
             </Wrapper>
         )

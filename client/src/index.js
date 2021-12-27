@@ -3,19 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {appConfig} from "./configs/app";
-import axios from "axios";
-
-// setup axios for external calls to Github api by default
-axios.defaults.baseURL = appConfig.github.url;
-// axios.defaults.headers.common['Authorization'] = process.env.GIT_TOKEN; // note needed for our current usecase
-axios.defaults.headers.post['Accept'] = appConfig.github.accept;
-axios.defaults.headers.post['Content-Type'] = appConfig.github.content_type;
-// do not throw 400 errors, return them for now
-axios.defaults.validateStatus = function () {
-    return true;
-};
-
 
 ReactDOM.render(
   <React.StrictMode>
