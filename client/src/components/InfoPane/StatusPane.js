@@ -3,6 +3,7 @@ import {Star, Trash2} from "react-feather";
 import {humanReadableDates} from "../../util/dateUtil";
 import {useContext, useRef} from "react";
 import HoverEventContext from "../../contexts/HoverEventContext";
+import {humanReadableStrings} from "../../util/stringUtil";
 
 const PaneView = styled(Box)(({theme}) => ({
     backgroundColor: '#282736',
@@ -99,7 +100,7 @@ export const StatusPane = ({data, removeHandler}) => {
                 </ThrashButton>
                 <PaneViewContent>
                     <Star size={18}/>
-                    <span><b>{data.stargazers_count}</b></span>
+                    <span><b>{humanReadableStrings(data.stargazers_count)}</b></span>
                     <span>{humanReadableDates(data.updated_at)}</span>
                 </PaneViewContent>
             </PaneView>
