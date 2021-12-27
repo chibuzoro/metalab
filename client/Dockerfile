@@ -13,4 +13,4 @@ RUN yarn install -p
 COPY src /metalab/src
 COPY public /metalab/public
 
-CMD ["yarn", "build"]
+CMD ["yarn", "start"]
