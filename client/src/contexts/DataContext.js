@@ -107,6 +107,7 @@ export const DataProvider = ({children}) => {
         }catch (e){
             // handle weird errors
             console.error(e);
+            return [];
         }
 
     }
