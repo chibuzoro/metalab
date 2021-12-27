@@ -2,7 +2,7 @@
 
 The greatest risk remains availability of resource (skilled persons) to complete the project.
 
-However, where resource is available, frequency of change request (design and feature) or change in spec of the API from third party services become a bottleneck
+However, where resource is available, frequency of change request (design and feature), communication and change in spec or availability of the API from third party services become a bottleneck
 #
 ### What changes/additions would you make to the design?
 Given the scope/objective of the project, the design properly caters for the minimum requirements. However, I would:
