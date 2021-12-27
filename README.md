@@ -14,17 +14,17 @@ Build the image and run the container using docker compose
 
 ### For Docker compose v2.
 `docker compose up -d --build`
-#
+
 ### For Docker compose v1.
 
 `docker-compose up -d --build`
 
-###Launch the application
+#### Launch the application
 The application can now be accessed on the following url
 
 `http://localhost:3000/`
 
-
+#
 ### Bonus
 The application includes a Nodejs application located in the server folder. 
 This is simply an api wrapper for playing with the api responses from Github. It is available on `port 5000` and can be reached

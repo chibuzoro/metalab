@@ -2,7 +2,7 @@
 I originally intended to build a backend system that will serve the api responses to the SPA rather than allow the application directly interface with third party apis as I intended to hide any authorization requirement that Github may need to grant more permissions to the application. 
 
 However, I have opted otherwise hence the Github API for this usecase mostly allowed public api request with the only caveat being a rate-limit applied to each request. Thus to avoid hitting this limit early, I ensured all request to the Github API are delayed. caveats, there are some repos that will not allow viewing without permissions.
-
+#
 #### Architecture:
 - `MVVM pattern`. The application is designed with separation of concerns in mind to ease extensibility and scale the application more rapidly. A data provider aggregates data from api responses and formats it for use by various components. Most components are not aware of the source of data beyond it available in a format they can present. Also,
 I grouped respective domains of the application in their own respective folders. That is, components, apis, routes, configs, pages/views and shared resource (context) live independently and are further namespaced where applicable.
