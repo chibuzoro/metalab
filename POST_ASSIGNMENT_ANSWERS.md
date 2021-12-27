@@ -12,8 +12,9 @@ I grouped respective domains of the application in their own respective folders.
 ### How long did the assignment take (in hours)? Please break down your answer into buckets (e.g. "Learning Framework", "Coding", "Debugging").
 Giving the amount of time available to me to commit to this task, My time estimates are based on an average of an hour per day in a given week.
 - Learning: I spent significantly more time learning the nuances/changes in the React ecosystem since I last worked on the frontend including learning changes to libraries, CSS and design system framework I adopted. 2 days.
-- Coding and debugging: 8 hours
+- Coding and debugging: 8 hours, debugging CSS cost me additional 2 hours
 - Researching and Mock test: 1 hour or less for free chart libraries that have been adopted for React.
+- initial backend build: 30 mins (no longer used but left in as a bonus)
 #
 ### If you could go back and give yourself advice at the beginning of the project, what would it be?
 - Frontend development is filled with overwhelming uncertainties and frequent changes, do no fret, just pick one and do your best.
